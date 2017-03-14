@@ -4,15 +4,11 @@ using UnityEngine.UI;
 
 public class Shoot : MonoBehaviour
 {
-    //heat value, from 0 to 100
     public float heat = 0;
     private float bulletSpeed = 500;
-    //timer from the last bullet shot
-    float timer;
-    //rate of fire
-    float rof = 0.12f;
-    //timer used to lower heat once the player stop shooting for 3s or more
-    float heatimer;
+    private float timer;
+    private float rof = 0.12f;
+    private float heatimer;
 
     public Slider heatSlider;
     public Image filling;
@@ -53,7 +49,6 @@ public class Shoot : MonoBehaviour
         {
             hr = new Vector3(hr.x, hr.y, hr.z - (hmod - rmod));
         }
-        //same code as yours, only difference is that instead of using "transform.rotation" i use "Quaternion.Euler(hr)", it bascially take the Vector3 and converts it so we can use it as transform.rotate
         Vector3 weaponPosition = new Vector3(transform.position.x, transform.position.y, (transform.position.z + 0.02f));
         GameObject projClone = (GameObject)Instantiate(Resources.Load("projectile"), weaponPosition, Quaternion.Euler(hr));
         projClone.GetComponent<HitController>().IsAPlayerBullet = true;
@@ -62,7 +57,6 @@ public class Shoot : MonoBehaviour
         Destroy(projClone, 0.5f);
     }
 
-    // Update is called once per frame
     void Update()
     {
         UpdateSlider();
@@ -112,15 +106,5 @@ public class Shoot : MonoBehaviour
                 rof = 0.12f;
             }
         }
-    }
-
-    void OnGUI()
-    {
-        //GUILayout.Label(" ");
-        //GUILayout.Label("Heat:" + heat);
-        //GUILayout.Label("Timer:" + timer);
-        //GUILayout.Label("Heat Timer:" + heatimer);
-        //GUILayout.Label("Rate of Fire" + rof);
-
     }
 }
