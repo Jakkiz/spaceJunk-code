@@ -4,15 +4,13 @@ using System.Collections;
 public class Shield : MonoBehaviour
 {
     public int shieldMax;
-    public int currentShield;
 
-    bool shipGotHit = false;
-    CircleCollider2D collider;
+    private int currentShield;
+    private bool shipGotHit = false;
+    private CircleCollider2D collider;
+    private float timer;
+    private float shieldTimer;
 
-    public float timer;
-    public float shieldTimer;
-
-    // Use this for initialization
     void Start()
     {
         shieldMax = GetComponentInParent<Characteristics>().shield;
@@ -56,8 +54,7 @@ public class Shield : MonoBehaviour
         }
     }
 
-	// Update is called once per frame
-	void Update ()
+    void Update ()
     {
         currentShield = GetComponentInParent<Characteristics>().shield;
         CheckIfShieldDown();
@@ -85,5 +82,5 @@ public class Shield : MonoBehaviour
                 }
             }
         }
-	}
+    }
 }
